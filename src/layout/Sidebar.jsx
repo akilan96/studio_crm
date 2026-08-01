@@ -27,8 +27,8 @@ export const Sidebar = ({ isOpen, toggleSidebar }) => {
     >
       <div className="flex items-center justify-between p-6">
         {isOpen ? (
-          <div className="text-xl font-bold text-white whitespace-nowrap">
-            Mersal Media
+          <div className="flex items-center justify-center w-full">
+            <img src="/logo.png" alt="Mersal Media Logo" className="h-16 object-contain max-w-full px-2" />
           </div>
         ) : (
           <div className="mx-auto w-10 h-10 bg-gradient-to-tr from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">M</div>

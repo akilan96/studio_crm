@@ -19,8 +19,9 @@ export const Documents = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) { // 2MB limit for local storage safety
-        addToast('File is too large. Please upload files under 2MB.', 'error');
+      if (file.size > 4 * 1024 * 1024) { // 4MB limit
+        addToast('File is too large. Please upload files under 4MB.', 'error');
+        if (fileInputRef.current) fileInputRef.current.value = '';
         return;
       }
       const reader = new FileReader();
@@ -32,6 +33,7 @@ export const Documents = () => {
           date: new Date().toISOString()
         });
         addToast('Document uploaded successfully!', 'success');
+        if (fileInputRef.current) fileInputRef.current.value = '';
       };
       reader.readAsDataURL(file);
     }
@@ -74,7 +76,7 @@ export const Documents = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {documents.map(doc => (
+        {(documents || []).map(doc => (
           <div key={doc.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow group flex flex-col">
             <div className="flex items-start gap-4 mb-4">
               <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
@@ -108,7 +110,7 @@ export const Documents = () => {
           </div>
         ))}
         
-        {documents.length === 0 && (
+        {(!documents || documents.length === 0) && (
           <div className="col-span-full py-12 text-center border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl bg-slate-50/50 dark:bg-slate-900/50">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-500 mb-4">
               <FiFileText size={28} />

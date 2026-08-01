@@ -83,10 +83,6 @@ export const Login = () => {
             {isLoading ? 'Authenticating...' : 'Sign In'}
           </Button>
         </form>
-        
-        <div className="mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800/50 text-center text-sm font-medium text-zinc-400 dark:text-zinc-500">
-          <p>Demo: admin / admin123</p>
-        </div>
       </motion.div>
     </div>
   );

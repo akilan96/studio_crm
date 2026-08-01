@@ -62,8 +62,8 @@ export const useStore = create(
       deleteWish: (id) => set((state) => ({ wishes: state.wishes.filter(w => w.id !== id) })),
 
       // Document CRUD
-      addDocument: (doc) => set((state) => ({ documents: [{ ...doc, id: `DOC-${Date.now()}` }, ...state.documents] })),
-      deleteDocument: (id) => set((state) => ({ documents: state.documents.filter(d => d.id !== id) })),
+      addDocument: (doc) => set((state) => ({ documents: [{ ...doc, id: `DOC-${Date.now()}` }, ...(state.documents || [])] })),
+      deleteDocument: (id) => set((state) => ({ documents: (state.documents || []).filter(d => d.id !== id) })),
 
       // Contact CRUD
       addContact: (contact) => set((state) => ({ contacts: [...state.contacts, { ...contact, id: `CONT-${Date.now()}` }] })),
