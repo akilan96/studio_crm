@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { MainLayout } from './layout/MainLayout';
 import { Login } from './pages/Login';
@@ -9,8 +9,13 @@ import { Notifications } from './pages/Notifications';
 import { Wishes } from './pages/Wishes';
 import { Documents } from './pages/Documents';
 import { Contact } from './pages/Contact';
+import { useStore } from './services/store';
 
 function App() {
+  useEffect(() => {
+    useStore.getState().initializeData();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
