@@ -32,7 +32,12 @@ export const useStore = create((set, get) => ({
   notifications: [],
   documents: [],
   contacts: [],
-  isInitialized: false,
+  // Team CRUD
+  addAdmin: (admin) => set((state) => ({ team: [...state.team, { ...admin, id: Date.now() }] })),
+  updateAdmin: (id, updatedAdmin) => set((state) => ({
+    team: state.team.map(t => t.id === id ? { ...t, ...updatedAdmin } : t)
+  })),
+  deleteAdmin: (id) => set((state) => ({ team: state.team.filter(t => t.id !== id) })),
 
   // Initialize Data from Supabase
   initializeData: async () => {
