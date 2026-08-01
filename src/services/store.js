@@ -5,17 +5,27 @@ import adminData from '../json/adminData.json';
 
 export const useStore = create((set, get) => ({
   // Auth
-  user: null,
+  user: (() => {
+    try {
+      return JSON.parse(localStorage.getItem('crm_user')) || null;
+    } catch {
+      return null;
+    }
+  })(),
   login: (username, password) => {
     const { team } = get();
     const found = team.find(u => u.username === username && u.password === password);
     if (found) {
+      localStorage.setItem('crm_user', JSON.stringify(found));
       set({ user: found });
       return true;
     }
     return false;
   },
-  logout: () => set({ user: null }),
+  logout: () => {
+    localStorage.removeItem('crm_user');
+    set({ user: null });
+  },
 
   // Theme
   theme: localStorage.getItem('theme') || 'light',
@@ -39,17 +49,19 @@ export const useStore = create((set, get) => ({
   })),
   deleteAdmin: (id) => set((state) => ({ team: state.team.filter(t => t.id !== id) })),
 
+  isInitialized: false,
+
   // Initialize Data from Supabase
   initializeData: async () => {
     if (get().isInitialized) return;
     
     try {
       const [
-        { data: tasksData },
-        { data: wishesData },
-        { data: documentsData },
-        { data: contactsData },
-        { data: notificationsData }
+        { data: tasksData, error: tasksErr },
+        { data: wishesData, error: wishesErr },
+        { data: documentsData, error: docsErr },
+        { data: contactsData, error: contactsErr },
+        { data: notificationsData, error: notifErr }
       ] = await Promise.all([
         supabase.from('tasks').select('*').order('id', { ascending: false }),
         supabase.from('wishes').select('*').order('id', { ascending: false }),
@@ -57,6 +69,12 @@ export const useStore = create((set, get) => ({
         supabase.from('contacts').select('*'),
         supabase.from('notifications').select('*').order('id', { ascending: false })
       ]);
+
+      if (tasksErr) console.error("Tasks fetch error from Supabase:", tasksErr);
+      if (wishesErr) console.error("Wishes fetch error from Supabase:", wishesErr);
+      if (docsErr) console.error("Docs fetch error from Supabase:", docsErr);
+      if (contactsErr) console.error("Contacts fetch error from Supabase:", contactsErr);
+      if (notifErr) console.error("Notifications fetch error from Supabase:", notifErr);
 
       set({
         tasks: tasksData || [],
