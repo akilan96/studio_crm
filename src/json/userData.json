@@ -1,0 +1,40 @@
+[
+  {
+    "id": "TASK-001",
+    "date": "2026-08-05",
+    "clientName": "Arun Kumar",
+    "location": "Chennai",
+    "phoneNumber": "9876543210",
+    "functionType": "Wedding",
+    "status": "Booked",
+    "responsibility": "Team A",
+    "cameraTeam": ["Alice", "Bob"],
+    "editingTeam": ["Charlie"],
+    "deliveryDate": "2026-08-20",
+    "notes": "Bring extra drone batteries.",
+    "bookingAdvance": 10000,
+    "totalPayment": 50000,
+    "settledPayment": 10000,
+    "pendingPayment": 40000,
+    "galleryLink": "https://drive.google.com/..."
+  },
+  {
+    "id": "TASK-002",
+    "date": "2026-08-02",
+    "clientName": "Priya Singh",
+    "location": "Bangalore",
+    "phoneNumber": "8765432109",
+    "functionType": "Pre-Wedding",
+    "status": "Completed",
+    "responsibility": "Team B",
+    "cameraTeam": ["Dave"],
+    "editingTeam": ["Eve"],
+    "deliveryDate": "2026-08-10",
+    "notes": "",
+    "bookingAdvance": 5000,
+    "totalPayment": 20000,
+    "settledPayment": 20000,
+    "pendingPayment": 0,
+    "galleryLink": "https://drive.google.com/..."
+  }
+]

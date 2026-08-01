@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "Super Admin",
+    "username": "admin",
+    "password": "admin123",
+    "role": "Super Admin",
+    "phone": "9876543210",
+    "email": "admin@studio.com",
+    "createdAt": "2026-08-01"
+  }
+]

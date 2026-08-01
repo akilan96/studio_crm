@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "date": "2026-08-03",
+    "function": "Birthday",
+    "personName": "Akilan",
+    "type": "Client"
+  },
+  {
+    "id": 2,
+    "date": "2026-08-15",
+    "function": "Wedding Anniversary",
+    "personName": "Arun",
+    "type": "Team Member"
+  }
+]
