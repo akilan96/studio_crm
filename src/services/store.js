@@ -75,56 +75,67 @@ export const useStore = create((set, get) => ({
   addTask: async (task) => {
     const newTask = { ...task, id: `TASK-${Date.now()}` };
     set((state) => ({ tasks: [newTask, ...state.tasks] }));
-    await supabase.from('tasks').insert(newTask);
+    const { error } = await supabase.from('tasks').insert(newTask);
+    if (error) console.error("Error adding task to Supabase:", error);
   },
   updateTask: async (id, updatedTask) => {
     set((state) => ({ tasks: state.tasks.map(t => t.id === id ? { ...t, ...updatedTask } : t) }));
-    await supabase.from('tasks').update(updatedTask).eq('id', id);
+    const { error } = await supabase.from('tasks').update(updatedTask).eq('id', id);
+    if (error) console.error("Error updating task in Supabase:", error);
   },
   deleteTask: async (id) => {
     set((state) => ({ tasks: state.tasks.filter(t => t.id !== id) }));
-    await supabase.from('tasks').delete().eq('id', id);
+    const { error } = await supabase.from('tasks').delete().eq('id', id);
+    if (error) console.error("Error deleting task from Supabase:", error);
   },
 
   // Wish CRUD
   addWish: async (wish) => {
     const newWish = { ...wish, id: `WISH-${Date.now()}` };
     set((state) => ({ wishes: [newWish, ...state.wishes] }));
-    await supabase.from('wishes').insert(newWish);
+    const { error } = await supabase.from('wishes').insert(newWish);
+    if (error) console.error("Error adding wish to Supabase:", error);
   },
   updateWish: async (id, updatedWish) => {
     set((state) => ({ wishes: state.wishes.map(w => w.id === id ? { ...w, ...updatedWish } : w) }));
-    await supabase.from('wishes').update(updatedWish).eq('id', id);
+    const { error } = await supabase.from('wishes').update(updatedWish).eq('id', id);
+    if (error) console.error("Error updating wish in Supabase:", error);
   },
   deleteWish: async (id) => {
     set((state) => ({ wishes: state.wishes.filter(w => w.id !== id) }));
-    await supabase.from('wishes').delete().eq('id', id);
+    const { error } = await supabase.from('wishes').delete().eq('id', id);
+    if (error) console.error("Error deleting wish from Supabase:", error);
   },
 
   // Document CRUD
   addDocument: async (doc) => {
     const newDoc = { ...doc, id: `DOC-${Date.now()}` };
     set((state) => ({ documents: [newDoc, ...(state.documents || [])] }));
-    await supabase.from('documents').insert(newDoc);
+    const { error } = await supabase.from('documents').insert(newDoc);
+    if (error) console.error("Error adding document to Supabase:", error);
   },
   deleteDocument: async (id) => {
     set((state) => ({ documents: (state.documents || []).filter(d => d.id !== id) }));
-    await supabase.from('documents').delete().eq('id', id);
+    const { error } = await supabase.from('documents').delete().eq('id', id);
+    if (error) console.error("Error deleting document from Supabase:", error);
   },
 
   // Contact CRUD
   addContact: async (contact) => {
     const newContact = { ...contact, id: `CONT-${Date.now()}` };
     set((state) => ({ contacts: [...state.contacts, newContact] }));
-    await supabase.from('contacts').insert(newContact);
+    const { error } = await supabase.from('contacts').insert(newContact);
+    if (error) console.error("Error adding contact to Supabase:", error);
   },
   updateContact: async (id, updated) => {
     set((state) => ({ contacts: state.contacts.map(c => c.id === id ? { ...c, ...updated } : c) }));
-    await supabase.from('contacts').update(updated).eq('id', id);
+    const { error } = await supabase.from('contacts').update(updated).eq('id', id);
+    if (error) console.error("Error updating contact in Supabase:", error);
   },
   deleteContact: async (id) => {
     set((state) => ({ contacts: state.contacts.filter(c => c.id !== id) }));
-    await supabase.from('contacts').delete().eq('id', id);
+    const { error } = await supabase.from('contacts').delete().eq('id', id);
+    if (error) console.error("Error deleting contact from Supabase:", error);
   },
 
   // Notifications
